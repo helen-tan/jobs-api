@@ -1,6 +1,6 @@
 const express = require('express');
 const dotenv = require('dotenv');
-const mysql = require('mysql');
+const mysql = require('mysql2');
 
 // Create connection 
 const db = mysql.createConnection({
@@ -11,7 +11,10 @@ const db = mysql.createConnection({
 })
 
 // Connect to MySQL
-db.connect((err) => {
+db.connect((error) => {
+    if (error) {
+        throw error;
+    }
     console.log('MySql Connected!');
 })
 
@@ -19,6 +22,15 @@ const app = express();
 
 // Setting up config.env file variables
 dotenv.config({path: './config/config.env'});
+
+// Test GET route
+app.get('/api/v1/jobstest', (req, res) => {
+    let sql = 'SELECT * FROM jobs';
+    let query = db.query(sql, (err, results, fields) => {
+        console.log(results);
+        res.send(results);
+    })
+})
 
 // Importing all routes
 const jobs = require('./routes/jobs');
