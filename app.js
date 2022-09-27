@@ -1,5 +1,19 @@
 const express = require('express');
 const dotenv = require('dotenv');
+const mysql = require('mysql');
+
+// Create connection 
+const db = mysql.createConnection({
+    host     : 'localhost',
+    user     : 'root',
+    password : '158848',
+    database : 'jobs_api_db'
+})
+
+// Connect to MySQL
+db.connect((err) => {
+    console.log('MySql Connected!');
+})
 
 const app = express();
 
