@@ -21,9 +21,11 @@ exports.getJobs = (req, res, next) => {
             res.send('Could not get results')
         } else {
             console.log(results);
-            res.send({
-                results,
-                requestMethod: req.requestMethod
+            res.status(200).send({
+                success: true,
+                results: results.length,
+                requestMethod: req.requestMethod,
+                data: results
             });
         }
     })
