@@ -1,7 +1,7 @@
 // Jobs Controller contains all the methods for the Jobs Router
 const db = require('../config/database');
 
-// Test GET route
+// Test GET route (MOVED INTO getJobs Method)
 //app.get('/api/v1/jobstest', (req, res) => {
 //   let sql = 'SELECT * FROM jobs';
 //    let query = db.query(sql, (err, results, fields) => {
