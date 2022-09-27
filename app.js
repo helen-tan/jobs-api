@@ -23,6 +23,17 @@ const app = express();
 // Setting up config.env file variables
 dotenv.config({path: './config/config.env'});
 
+// Creating own middleware - middleware is a fn available everywhere in the project
+const middleware = (req, res, next) => {
+    console.log('Hello from middleware');
+
+    // Setting up a variable globally
+    req.requestMethod = req.method;
+    next();
+}
+
+app.use(middleware);
+
 // Test GET route
 app.get('/api/v1/jobstest', (req, res) => {
     let sql = 'SELECT * FROM jobs';
