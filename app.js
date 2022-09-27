@@ -1,22 +1,5 @@
 const express = require('express');
 const dotenv = require('dotenv');
-const mysql = require('mysql2');
-
-// Create connection 
-const db = mysql.createConnection({
-    host     : 'localhost',
-    user     : 'root',
-    password : '158848',
-    database : 'jobs_api_db'
-})
-
-// Connect to MySQL
-db.connect((error) => {
-    if (error) {
-        throw error;
-    }
-    console.log('MySql Connected!');
-})
 
 const app = express();
 
@@ -33,15 +16,6 @@ const middleware = (req, res, next) => {
 }
 
 app.use(middleware);
-
-// Test GET route
-app.get('/api/v1/jobstest', (req, res) => {
-    let sql = 'SELECT * FROM jobs';
-    let query = db.query(sql, (err, results, fields) => {
-        console.log(results);
-        res.send(results);
-    })
-})
 
 // Importing all routes
 const jobs = require('./routes/jobs');
